@@ -40,16 +40,32 @@ app.listen(PORT, () => {
     console.log(`Locahost webserver is listening on port ${PORT}`);
 })
 
-app.get("/test", async (req , res ) => {
+let timestamp = -1;
 
-  //  http://localhost:7000/test?action=42
+app.get("/cycle", async (req , res ) => {
 
-    console.log(`req ${req.query['action']}`);
+  // Timestamp Number must change to move the cycle to the next streetview panorama  
+  // http://localhost:7000/cycle?timestamp=42
+
+    timestamp = req.query['timestamp'];
 
     try {
-      return res.status(200).json({'req' : req.query['action']})
+      return res.status(200).json({'timestamp' : timestamp})
     } catch (error) {
       return res.status(501).json({error})
+    }
+});
+
+app.get("/fetch", async (req , res ) => {
+
+  //  http://localhost:7000/fetch
+
+    console.log(`fetch timestamp ${timestamp}`);
+
+    try {
+      return res.status(200).json({'timestamp' : timestamp});
+    } catch (error) {
+      return res.status(501).json({error});
     }
 });
 

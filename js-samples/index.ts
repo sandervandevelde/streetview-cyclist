@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
-
 function initialize() {
   const panorama = new google.maps.StreetViewPanorama(
     document.getElementById("pano") as HTMLElement,
@@ -28,6 +26,7 @@ window.initialize = initialize;
 var panotest;
 
 // test coordinates
+var heading = 70;
 var latitude = 37.86926; 
 var longitude = -122.254811;
 
@@ -36,21 +35,32 @@ latitude = 40.74750521592752;
 longitude = -73.98526357003048;
 
 // route 66
+heading = 70;
 latitude = 36.14417733187105;
 longitude = -96.00325431507174;
 
-var heading = 70;
+var executionOnceOnStartup = 0;
 
-var single = 0;
+var lastFetchTimestamp = -1;
 
 var links = [];
 
-window.setInterval(function() {
+window.setInterval(async function() {
 
-  var response = fetch('http://localhost:7000/fetch', {method: "GET"}, );
+  var response = await fetch('http://localhost:7000/fetch', {method: "GET"});
 
+  const data = await response.json();
+  
+  if (parseInt(data.timestamp) != lastFetchTimestamp)
+  {
+    lastFetchTimestamp = data.timestamp;
+  }
+  else
+  {
+    return;
+  }
 
-  if (single == 0)
+  if (executionOnceOnStartup == 0)
   {
     panotest = new google.maps.StreetViewPanorama(document.getElementById('pano')  as HTMLElement);
 
@@ -58,7 +68,7 @@ window.setInterval(function() {
       links = panotest.getLinks();
     });
     
-    single = 1;
+    executionOnceOnStartup = 1;
   }
 
     if (links.length > 0)
@@ -79,7 +89,7 @@ window.setInterval(function() {
       panotest.setPov(pov);    
     }
 
-}, 2500);
+}, 500);
 
 
 export {};
