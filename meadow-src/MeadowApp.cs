@@ -28,7 +28,7 @@ namespace Project1
             {
                 Resolver.Log.Info($"Start connecting.....");
 
-                wifi.Connect("gspot", "sinterklaas", TimeSpan.FromSeconds(60));
+                wifi.Connect("ssid", "secret", TimeSpan.FromSeconds(60));
 
                 Resolver.Log.Info($"Is connected.....");
             }
