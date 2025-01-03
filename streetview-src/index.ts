@@ -27,28 +27,14 @@ var panotest;
 
 // test coordinates
 var heading = 70;
-var latitude = 37.86926; 
-var longitude = -122.254811;
+var latitude = 0; 
+var longitude = 0;
 
-// new york 5th avanue
-//heading = 70;
-//latitude = 40.74750521592752;
-//longitude = -73.98526357003048;
-
-// route 66
-//heading = 70;
-//latitude = 36.14417733187105;
-//longitude = -96.00325431507174;
-
-
-// arrizona
-heading = 70;
-latitude = 33.68457960371;
-longitude = -111.49962138054569;
+var movetonewlocation = false;
 
 var executionOnceOnStartup = 0;
 
-var lastFetchTimestamp = -1;
+var lastFetchTimestamp = -11;
 
 var links = [];
 
@@ -60,10 +46,22 @@ window.setInterval(async function() {
   
   if (parseInt(data.timestamp) != lastFetchTimestamp)
   {
+    // new timestamp and potentially new coordinates
+  
     lastFetchTimestamp = data.timestamp;
+
+    if (latitude != parseFloat(data.lat) && longitude != parseFloat(data.lon))
+    {
+      // new coordinates
+      movetonewlocation = true;
+    }
+
+    latitude = parseFloat(data.lat);
+    longitude = parseFloat(data.lon);
   }
   else
   {
+    // no new timestamp
     return;
   }
 
@@ -78,8 +76,11 @@ window.setInterval(async function() {
     executionOnceOnStartup = 1;
   }
 
-    if (links.length > 0)
+    if (movetonewlocation == false 
+          && links.length > 0)
     {
+      // show the next panorama taken from the links
+
       panotest.setMotionTracking(false);
       panotest.setPano(links[0].pano);
 
@@ -89,6 +90,10 @@ window.setInterval(async function() {
     }
     else
     {
+      // show the (new) start point 
+
+      movetonewlocation = false
+
       panotest.setMotionTracking(false);
       panotest.setPosition({ lat: latitude, lng: longitude});
       var pov = panotest.getPov();

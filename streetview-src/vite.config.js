@@ -40,6 +40,39 @@ app.listen(PORT, () => {
 
 let timestamp = -1;
 
+// test coordinates
+//let lat = 37.86926; 
+//let lon = -122.254811;
+
+// new york 5th avanue
+//let lat = 40.74750521592752;
+//let lon = -73.98526357003048;
+
+// route 66
+//let lat = 36.14417733187105;
+//let lon = -96.00325431507174;
+
+// arrizona
+let lat = 33.68457960371;
+let lon = -111.49962138054569;
+
+app.get("/location", async (req , res ) => {
+
+  // Timestamp Number must change to move the cycle to the next streetview panorama  
+  // http://localhost:7000/location?lat=36.14417733187105&lon=-96.00325431507174
+
+    lat = req.query['lat'];
+    lon = req.query['lon'];
+
+    console.log(`Location lat: ${lat}; lon: ${lon}`);
+
+    try {
+      return res.status(200).json({'lat' : lat, 'lon' : lon})
+    } catch (error) {
+      return res.status(501).json({error})
+    }
+});
+
 app.get("/cycle", async (req , res ) => {
 
   // Timestamp Number must change to move the cycle to the next streetview panorama  
@@ -60,11 +93,11 @@ app.get("/fetch", async (req , res ) => {
 
   //  http://localhost:7000/fetch
 
-    console.log(`fetch timestamp ${timestamp}`);
+  console.log(`fetch timestamp ${timestamp}, lat ${lat}, lon ${lon}`);
 
-    try {
-      return res.status(200).json({'timestamp' : timestamp});
-    } catch (error) {
-      return res.status(501).json({error});
-    }
+  try {
+    return res.status(200).json({'timestamp': timestamp, 'lat' : lat, 'lon' : lon});
+  } catch (error) {
+    return res.status(501).json({error});
+  }
 });

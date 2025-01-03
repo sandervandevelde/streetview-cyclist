@@ -54,7 +54,41 @@ Follow the following steps:
 12. In the meadow console, see the website is being called
 13. In the server app, see the incoming cycle calls
 
-Notice that the web server app and 
+Notice that the web server app uses port 7000.
+
+## Rest API
+
+The rest application comes with three api calls.
+
+These are all GET calls.
+
+### /fetch
+
+The typescript logic in the browser calls 'fetch' to retrieve the latest timestamp plus optional location cooridates:
+
+```
+http://localhost:7000/fetch
+```
+
+### /cycle
+
+Any client can serve a timestamp: 
+
+```
+http://localhost:7000/cycle?timestamp=42
+```
+
+If the timestamp differs from the last call, this signals the streetview to show the next panorama.
+
+### /location
+
+A new starting point can be sent via this call:
+
+```
+http://localhost:7000/location?lat=36.14417733187105&lon=-96.00325431507174
+```
+
+Notice that it is only picked up once a new fetch is executed.
 
 ## License
 
