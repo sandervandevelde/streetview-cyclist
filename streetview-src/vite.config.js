@@ -7,7 +7,6 @@ import helmet from "helmet";
 
 export const userRouter = express.Router();
 
-
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
@@ -17,7 +16,6 @@ export default defineConfig({
         : undefined,
   },
 });
-
 
 dotevnv.config();
 
@@ -70,5 +68,3 @@ app.get("/fetch", async (req , res ) => {
       return res.status(501).json({error});
     }
 });
-
-

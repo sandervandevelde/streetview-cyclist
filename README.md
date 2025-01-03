@@ -48,9 +48,15 @@ Follow the following steps:
 12. In the meadow console, see website is called
 13. In the server app, see the incoming cycle calls
 
+Notice that the web server app and 
+
 ## License
 
-This repository is available under MIT license.
+This Streetview Cyclist repository is available under MIT license.
+
+This repository is partly based on this [Street view side-by-side](https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#clone-sample) example.
+
+That code has copyrights: Copyright 2019 Google LLC. All Rights Reserved. SPDX-License-Identifier: Apache-2.0
 
 ## Contributions
 

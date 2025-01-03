@@ -12,6 +12,7 @@ namespace Project1
     public class MeadowApp : App<F7FeatherV2>
     {
         private static int _counter = 0;
+
         public override Task Initialize()
         {
             Resolver.Log.Info("Initialize...");
@@ -29,15 +30,11 @@ namespace Project1
                 Resolver.Log.Info($"Start connecting.....");
 
                 wifi.Connect("ssid", "secret", TimeSpan.FromSeconds(60));
-
-                Resolver.Log.Info($"Is connected.....");
             }
             catch (Exception ex)
             {
                 Resolver.Log.Info($"Connection exception: {ex.Message}");
             }
-
-            //            Resolver.Log.Info($"SSID: {wifi.DefaultSsid}");
 
             return base.Initialize();
         }
@@ -78,10 +75,5 @@ namespace Project1
                 }
             }
         }
-    }
-
-    public class GetCycle
-    {
-        public int timestamp { get; set; }
     }
 }

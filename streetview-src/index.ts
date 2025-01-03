@@ -31,20 +31,20 @@ var latitude = 37.86926;
 var longitude = -122.254811;
 
 // new york 5th avanue
-latitude = 40.74750521592752;
-longitude = -73.98526357003048;
+//heading = 70;
+//latitude = 40.74750521592752;
+//longitude = -73.98526357003048;
 
 // route 66
-heading = 70;
+//heading = 70;
 //latitude = 36.14417733187105;
 //longitude = -96.00325431507174;
 
 
 // arrizona
-
+heading = 70;
 latitude = 33.68457960371;
 longitude = -111.49962138054569;
-
 
 var executionOnceOnStartup = 0;
 
