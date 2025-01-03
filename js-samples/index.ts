@@ -36,8 +36,15 @@ longitude = -73.98526357003048;
 
 // route 66
 heading = 70;
-latitude = 36.14417733187105;
-longitude = -96.00325431507174;
+//latitude = 36.14417733187105;
+//longitude = -96.00325431507174;
+
+
+// arrizona
+
+latitude = 33.68457960371;
+longitude = -111.49962138054569;
+
 
 var executionOnceOnStartup = 0;
 
@@ -73,19 +80,20 @@ window.setInterval(async function() {
 
     if (links.length > 0)
     {
-      panotest.setPano(links[0].pano);
       panotest.setMotionTracking(false);
+      panotest.setPano(links[0].pano);
+
       var pov = panotest.getPov();
       pov.heading = links[0].heading;
       panotest.setPov(pov);    
     }
     else
     {
-      panotest.setPosition({ lat: latitude, lng: longitude });
+      panotest.setMotionTracking(false);
+      panotest.setPosition({ lat: latitude, lng: longitude});
       var pov = panotest.getPov();
       heading = heading + 10;
       pov.heading = heading;
-      panotest.setMotionTracking(false);
       panotest.setPov(pov);    
     }
 

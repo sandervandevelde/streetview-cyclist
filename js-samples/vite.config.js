@@ -49,6 +49,8 @@ app.get("/cycle", async (req , res ) => {
 
     timestamp = req.query['timestamp'];
 
+    console.log(`Cycle ${timestamp}`);
+
     try {
       return res.status(200).json({'timestamp' : timestamp})
     } catch (error) {
