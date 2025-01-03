@@ -66,8 +66,6 @@ namespace Project1
                 {
                     if (result.New.State)
                     {
-                        SetColor(Color.Blue);
-
                         _flankCounter++;
                         //Resolver.Log.Info($"Observer filter {_flankCounter} satisfied, time: {result.New.Time}");
                     }
@@ -114,6 +112,8 @@ namespace Project1
         private async void NetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
         {
             Resolver.Log.Info("Connecting handler...");
+
+            SetColor(Color.Blue);
         }
 
         private async Task Cycle()
