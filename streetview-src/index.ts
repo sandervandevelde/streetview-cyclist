@@ -26,9 +26,9 @@ window.initialize = initialize;
 var panotest;
 
 // test coordinates
-var heading = 70;
-var latitude = 0; 
-var longitude = 0;
+var heading = 70.0;
+var latitude = 0.0; 
+var longitude = 0.0;
 
 var movetonewlocation = false;
 
@@ -50,14 +50,18 @@ window.setInterval(async function() {
   
     lastFetchTimestamp = data.timestamp;
 
-    if (latitude != parseFloat(data.lat) && longitude != parseFloat(data.lon))
+    if ((latitude != parseFloat(data.lat) 
+            && longitude != parseFloat(data.lon)) 
+        || heading != parseFloat(data.heading))
     {
       // new coordinates
       movetonewlocation = true;
-    }
 
-    latitude = parseFloat(data.lat);
-    longitude = parseFloat(data.lon);
+      // new heading
+      heading = parseFloat(data.heading);
+      latitude = parseFloat(data.lat);
+      longitude = parseFloat(data.lon);  
+    }
   }
   else
   {
@@ -97,7 +101,6 @@ window.setInterval(async function() {
       panotest.setMotionTracking(false);
       panotest.setPosition({ lat: latitude, lng: longitude});
       var pov = panotest.getPov();
-      heading = heading + 10;
       pov.heading = heading;
       panotest.setPov(pov);    
     }

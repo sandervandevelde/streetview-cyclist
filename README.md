@@ -85,10 +85,18 @@ If the timestamp differs from the last call, this signals the streetview to show
 A new starting point can be sent via this call:
 
 ```
-http://localhost:7000/location?lat=36.14417733187105&lon=-96.00325431507174
+http://localhost:7000/location?lat=36.14417733187105&lon=-96.00325431507174&heading=250
 ```
 
 Notice that it is only picked up once a new fetch is executed.
+
+## Does it work?
+
+Well, we are depending on the quality of streetview regarding the panoramas.
+
+It seems the panoramas are not as well alligned as expected. 
+
+So, you need to help the experience a bit if you get trapped in a loop by skipping to a panorama a few clicks away.
 
 ## License
 
