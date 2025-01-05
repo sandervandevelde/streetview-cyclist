@@ -6,6 +6,8 @@ You can cycle your way through Google Streetview, from location to location, and
 
 ![image](https://github.com/user-attachments/assets/e9641f3b-ba44-49f7-8a08-49baace943ce)
 
+See also this [blog post](https://sandervandevelde.wordpress.com/2025/01/05/cycle-around-the-world-with-streetview-and-a-wilderness-labs-meadow-f7/) for more background information.
+
 ## How does it work?
 
 The streetview app runs a nodejs webserver app.
@@ -37,9 +39,9 @@ I use an [Advantech POC-W243L](https://advdownload.advantech.com/productfile/PIS
 
 A [wilderness labs meadow f7](https://store.wildernesslabs.co/products/meadow-f7) is uses to turn sensor data into street view cycle events.
 
-As switch, a simple relay will do. I use a [e3jk-ds30m1](https://www.farnell.com/datasheets/1634350.pdf). It is powered by 12 volts but offers me an acurate photoelectric sensor relay switch so no contact with the pedals is needed. 
+As a switch, a simple relay will do. I use a [e3jk-ds30m1](https://www.farnell.com/datasheets/1634350.pdf). It is powered by 12 volts but offers me an acurate photoelectric sensor relay switch so no contact with the pedals is needed. 
 
-Regarding the fitness device, I got a Rambler RF 702 hometrainer. Because the sensor I use makes contactless measurements, almost any fitness device will do. I actually measure my the movement of one knee, not the pedals. 
+Regarding the fitness device, I got a Rambler RF 702 home trainer. Because the sensor I use makes contactless measurements, almost any fitness device will do. I actually measure my the movement of one knee, not the pedals. 
 
 ## Meadow F7v2 Feather
 
@@ -89,7 +91,7 @@ These are all GET calls.
 
 ### /fetch
 
-The typescript logic in the browser calls 'fetch' to retrieve the latest timestamp plus optional location cooridates:
+The typescript logic in the browser calls 'fetch' to retrieve the latest timestamp plus optional location coordinates:
 
 ```
 http://localhost:7000/fetch
@@ -127,7 +129,7 @@ Yes, we can cycle around the world now:
 
 But, we depend on the quality of streetview regarding the panoramas.
 
-It seems the panoramas are not as well alligned as expected. 
+It seems the panoramas are not as well aligned as expected. 
 
 So, you need to help the experience a bit if you get trapped in a loop by skipping to a panorama a few clicks away.
 
