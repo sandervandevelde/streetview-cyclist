@@ -37,6 +37,8 @@ A [wilderness labs meadow f7](https://store.wildernesslabs.co/products/meadow-f7
 
 As switch, a simple relay will do. I use a [e3jk-ds30m1](https://www.farnell.com/datasheets/1634350.pdf). It is powered by 12 volts but offers me an acurate photoelectric sensor relay switch so no contact with the pedals is needed. 
 
+Regarding the fitness device, I got a Rambler RF 702 hometrainer. Because the sensor I use makes contactless measurements, almost any fitness device will do. I actually measure my the movement of one knee, not the pedals. 
+
 ## Meadow F7v2 Feather
 
 This is a great board for both tinkering and production, especially if you only use C# as programming language.
