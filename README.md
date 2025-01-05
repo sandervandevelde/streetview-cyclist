@@ -115,13 +115,17 @@ http://localhost:7000/location?lat=36.14417733187105&lon=-96.00325431507174&head
 
 Notice that it is only picked up once a new fetch is executed. 
 
-The heading is only for applicable in the first panorama. 
+The heading is only applicable in the first panorama. 
 
 The next panorama from the list of directions describes the actual heading.
 
 ## Does it work?
 
-Well, we are depending on the quality of streetview regarding the panoramas.
+Yes, we can cycle around the world now:
+
+[![Check out the video](https://github.com/user-attachments/assets/3e33b270-e342-4cbf-adc4-621479cbdda4)](https://youtu.be/0PglvZBupWk)
+
+But, we depend on the quality of streetview regarding the panoramas.
 
 It seems the panoramas are not as well alligned as expected. 
 
