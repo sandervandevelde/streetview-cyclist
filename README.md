@@ -20,6 +20,8 @@ So, the meadow controls the street view panorama.
 
 It's up to you to add logic to send that cycle signal.
 
+![image](https://github.com/user-attachments/assets/f28f9cd2-56f2-4f19-b0c9-db35aadf1810)
+
 Why not sense the pedals of a home trainer?
 
 ## Prerequisites
