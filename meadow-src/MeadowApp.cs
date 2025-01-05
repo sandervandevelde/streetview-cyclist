@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 using Meadow;
 using Meadow.Devices;
@@ -12,6 +11,8 @@ namespace Project1
 {
     public class MeadowApp : App<F7FeatherV2>
     {
+        private HttpClient _client = null;
+
         RgbPwmLed onboardLed;
 
         IDigitalInterruptPort input;
@@ -34,10 +35,10 @@ namespace Project1
 
             var wifi = Device.NetworkAdapters.Primary<IWiFiNetworkAdapter>();
 
-            wifi.NetworkDisconnected += (s, e) => Resolver.Log.Info("Disconnected event...");
-            wifi.NetworkConnectFailed += (s) => Resolver.Log.Info("Connect failed event...");
-            wifi.NetworkConnecting += (s) => Resolver.Log.Info("Connecting event...");
-            wifi.NetworkError += (s, e) => Resolver.Log.Info($"Error event: {e.ErrorCode}");
+            wifi.NetworkDisconnected += (s, e) => Resolver.Log.Info("Network disconnected");
+            wifi.NetworkConnectFailed += (s) => Resolver.Log.Info("Network connect failed");
+            wifi.NetworkConnecting += (s) => Resolver.Log.Info("Network connecting");
+            wifi.NetworkError += (s, e) => Resolver.Log.Info($"Network error: {e.ErrorCode}");
             wifi.NetworkConnected += NetworkConnected;
 
             try
@@ -113,35 +114,36 @@ namespace Project1
 
         private async void NetworkConnected(INetworkAdapter sender, NetworkConnectionEventArgs args)
         {
-            Resolver.Log.Info("Connecting handler...");
+            Resolver.Log.Info("Network connected");
+
+            _client = new HttpClient();
+
+            Resolver.Log.Info("Client created");
 
             SetColor(Color.Blue);
         }
 
         private async Task Cycle()
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                try
-                {
-                    _cycles++;
+                _cycles++;
 
-                    HttpResponseMessage response =
-                        await client.GetAsync($"http://192.168.0.208:7000/cycle?timestamp={_cycles}");
+                HttpResponseMessage response =
+                    await _client.GetAsync($"http://192.168.0.208:7000/cycle?timestamp={_cycles}");
 
-                    response.EnsureSuccessStatusCode();
-                    string json = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
 
-                    Resolver.Log.Info($"Cycle: {_cycles}, Timestamp: {json}");
-                }
-                catch (TaskCanceledException)
-                {
-                    Resolver.Log.Info("Request timed out.");
-                }
-                catch (Exception e)
-                {
-                    Resolver.Log.Info($"Request went sideways: {e.Message}");
-                }
+                Resolver.Log.Info($"Cycle: {_cycles}, Timestamp: {json}");
+            }
+            catch (TaskCanceledException)
+            {
+                Resolver.Log.Info("Request timed out.");
+            }
+            catch (Exception e)
+            {
+                Resolver.Log.Info($"Request went sideways: {e.Message}");
             }
         }
 
