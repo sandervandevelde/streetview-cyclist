@@ -44,7 +44,7 @@ namespace Project1
             {
                 Resolver.Log.Info($"Start connecting.....");
 
-                wifi.Connect("ssid", "password", TimeSpan.FromSeconds(60));
+                wifi.Connect("ssid", "secret", TimeSpan.FromSeconds(60));
 
                 SetColor(Color.Blue);
             }
@@ -68,26 +68,28 @@ namespace Project1
                     {
                         _flankCounter++;
                         //Resolver.Log.Info($"Observer filter {_flankCounter} satisfied, time: {result.New.Time}");
-                    }
 
-                    var interval = 5;
+                        var interval = 3;
 
-                    var x = _flankCounter % (2* interval);
+                        var x = _flankCounter % (2 * interval); // counter modulo with (interval times two)
 
-                    if (x == 0 || x == interval)
-                    {
-                        await Cycle();
-                    }
+                        if (x == 0)
+                        {
+                            // when modulo is zero, then cycle
 
-                    if (x < interval)
-                    {
-                        //0- (interval-1)
-                        SetColor(Color.Red);
-                    }
-                    else
-                    {
-                        //interval-((2* interval) -1)
-                        SetColor(Color.Green);
+                            await Cycle();
+                        }
+
+                        if (x < interval)
+                        {
+                            //from 0 to (interval-1)
+                            SetColor(Color.Red);
+                        }
+                        else
+                        {
+                            //from interval to ((2 * interval) -1)
+                            SetColor(Color.Green);
+                        }
                     }
                 },
                 filter: result =>
