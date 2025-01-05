@@ -129,7 +129,9 @@ This Streetview Cyclist repository is available under an MIT license.
 
 This repository is partly based on this [Street view side-by-side](https://developers.google.com/maps/documentation/javascript/examples/streetview-simple#clone-sample) example.
 
-That code has copyrights: Copyright 2019 Google LLC. All Rights Reserved. SPDX-License-Identifier: Apache-2.0
+That code has its own copyrights: Copyright 2019 Google LLC. All Rights Reserved. SPDX-License-Identifier: Apache-2.0
+
+Please check the Streetview API website for additional requirements needed to access that streetview api.
 
 ## Contributions
 
